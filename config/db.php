@@ -4,7 +4,7 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=web6yii',
     'username' => 'mysql',
-//    'tablePrefix' => 'example_',
+//    'tablePrefix' => 'yii2grudik_',
     'password' => 'mysql',
     'charset' => 'utf8',
 

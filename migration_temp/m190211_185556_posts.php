@@ -21,6 +21,7 @@ class m190211_185556_posts extends Migration
             'title' => $this->string(255)->notNull(),
             'body' => $this->text()->notNull(),
             'date_created' => $this->timestamp(),//->defaultExpression('CURRENT_TIMESTAMP'), // ТАК НЕ ПИСАТИ
+            'avtor_id'=>$this->integer()->unique()
         ], $tableOptions);
     }
 
