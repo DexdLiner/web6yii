@@ -12,7 +12,19 @@ class m190213_184158_comments extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=INNODB';
+        }
+        $this->createTable('{{%comments}}', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'post_id' => $this->integer()->notNull(),
+            'body' => $this->text()->notNull(),
+            'date_created' => $this->timestamp()->defaultValue(null),
+            'date_updated' => $this->timestamp()->defaultValue(null)
 
+        ], $tableOptions);
     }
 
     /**
@@ -20,9 +32,9 @@ class m190213_184158_comments extends Migration
      */
     public function safeDown()
     {
-        echo "m190213_184158_comments cannot be reverted.\n";
+        $this->dropTable('{{%comments}}');
 
-        return false;
+        return true;
     }
 
     /*

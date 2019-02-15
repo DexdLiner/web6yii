@@ -28,6 +28,7 @@ class m190213_184127_users extends Migration
             'password_reset_token' => $this->string(32)->unique()
             //status: 1 - зареєстрований, 10 - підтверджений 11 - редактор 100 - адмін
         ], $tableOptions);
+
     }
 
     /**

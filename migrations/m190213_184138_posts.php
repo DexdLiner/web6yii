@@ -13,6 +13,20 @@ class m190213_184138_posts extends Migration
     public function safeUp()
     {
 
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=INNODB';
+        }
+        $this->createTable('{{%posts}}', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'date_created' => $this->timestamp()->defaultValue(null),
+            'date_updated' => $this->timestamp()->defaultValue(null),
+            'body' => $this->text()->notNull(),
+            'title' => $this->string(255)->notNull(),
+
+
+        ], $tableOptions);
     }
 
     /**
@@ -20,9 +34,9 @@ class m190213_184138_posts extends Migration
      */
     public function safeDown()
     {
-        echo "m190213_184138_posts cannot be reverted.\n";
+        $this->dropTable('{{%posts}}');
 
-        return false;
+        return true;
     }
 
     /*
