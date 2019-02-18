@@ -1,0 +1,2 @@
+grudik1,password1,email2,10,2019-02-15 21:08:00,2019-02-15 21:08:00,auth_key,password_reset_token
+grudik2,password2,email3,10,2019-02-15 21:08:00,2019-02-15 21:08:00,auth_key1,password_reset_token1

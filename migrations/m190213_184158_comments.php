@@ -23,7 +23,6 @@ class m190213_184158_comments extends Migration
             'body' => $this->text()->notNull(),
             'date_created' => $this->timestamp()->defaultValue(null),
             'date_updated' => $this->timestamp()->defaultValue(null)
-
         ], $tableOptions);
     }
 

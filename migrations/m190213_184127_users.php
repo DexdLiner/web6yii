@@ -22,13 +22,12 @@ class m190213_184127_users extends Migration
             'password' => $this->string(64)->notNull(),
             'email' => $this->string(255)->notNull()->unique(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
-            'created_at' => $this->timestamp()->defaultValue(null),
-            'updated_at' => $this->timestamp()->defaultValue(null),
+            'created_at' => $this->timestamp()->defaultValue(null)->notNull(),
+            'updated_at' => $this->timestamp()->defaultValue(null)->notNull(),
             'auth_key' => $this->string(32)->notNull(),
             'password_reset_token' => $this->string(32)->unique()
             //status: 1 - зареєстрований, 10 - підтверджений 11 - редактор 100 - адмін
         ], $tableOptions);
-
     }
 
     /**
