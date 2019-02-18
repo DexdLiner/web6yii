@@ -19,8 +19,23 @@ class SignUp extends Model
     public $confirmPassword;
     public $email;
 
+    public function rules()
+    {
+        return [
+            // username and password are both required
+            [['username', 'password'], 'required'],
+            // rememberMe must be a boolean value
+            ['email','validateEmail'],
+            ['password','validatePasswordAndPasswordConfirm']
+            // password is validated by validatePassword()
+
+        ];
+    }
+
     public function SignUp()
     {
-        Userdb::findByUsername($this->username);
+        $user = Userdb::findByUsername($this->username);
+
+        return false;
     }
 }

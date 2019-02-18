@@ -140,10 +140,10 @@ class SiteController extends Controller
     public function actionSignUp()
     {
         $data = new SignUp();
-        if ($data->load(Yii::$app->request->post())){
-            echo 'Заповнено';
+        if ($data->load(Yii::$app->request->post()) && $data->SignUp()) {
+            echo 'Зареєстроано';
         }
 
-            return $this->render('signup', ['model' => $data]);
+        return $this->render('signup', ['model' => $data]);
     }
 }
