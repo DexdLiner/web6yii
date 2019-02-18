@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\SignUp;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +11,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Userdb;
 
 class SiteController extends Controller
 {
@@ -61,6 +64,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+//        echo '<pre>';
+//        echo 123;
+//        print_r();
+//        echo '</pre>';
+        if (Yii::$app->user->identity->status !== 20) {
+            return $this->render('error', ['message' => 'У вас нет доступа']);
+        }
         return $this->render('index');
     }
 
@@ -75,8 +85,9 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) { //load - встановити властивості моделі  $_POST==Yii::$app->request->post()
             return $this->goBack();
         }
 
@@ -124,5 +135,15 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionSignUp()
+    {
+        $data = new SignUp();
+        if ($data->load(Yii::$app->request->post())){
+            echo 'Заповнено';
+        }
+
+            return $this->render('signup', ['model' => $data]);
     }
 }
