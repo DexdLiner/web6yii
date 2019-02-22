@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
+
 /* @var $model app\models\LoginForm */
 
 use yii\helpers\Html;
@@ -24,17 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => true,'required'=>'required']) ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'password')->passwordInput(['required'=>'required']) ?>
 
-      
+    <?= $form->field($model, 'confirmPassword')->passwordInput(['required'=>'required']) ?>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
+    <?= $form->field($model, 'email')->input('email'); ?>
+
+
+    <div class="form-group">
+        <div class="col-lg-offset-1 col-lg-11">
+            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

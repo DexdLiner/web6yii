@@ -15,9 +15,14 @@ use yii\web\IdentityInterface;
 
 class Userdb extends ActiveRecord implements \yii\web\IdentityInterface
 {
+    const USER_STATUS_REGISTERED = 1;
+    const USER_STATUS_CONFIRMED = 10;
+    const USER_STATUS_MODERATOR = 11;
+    const USER_STATUS_ADMIN = 100;
 
     public static function tableName()
     {
+
         return '{{%users}}';
 
     }

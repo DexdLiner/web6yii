@@ -68,9 +68,9 @@ class SiteController extends Controller
 //        echo 123;
 //        print_r();
 //        echo '</pre>';
-        if (Yii::$app->user->identity->status !== 20) {
-            return $this->render('error', ['message' => 'У вас нет доступа']);
-        }
+//        if (Yii::$app->user->identity->status !== 20) {
+//            return $this->render('error', ['message' => 'У вас нет доступа']);
+//        }
         return $this->render('index');
     }
 
@@ -141,8 +141,10 @@ class SiteController extends Controller
     {
         $data = new SignUp();
         if ($data->load(Yii::$app->request->post()) && $data->SignUp()) {
-            echo 'Зареєстроано';
+            Yii::$app->session->setFlash('success', 'ty 4 registration');
         }
+        $data->password = '';
+        $data->confirmPassword = '';
 
         return $this->render('signup', ['model' => $data]);
     }
