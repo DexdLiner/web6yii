@@ -25,6 +25,8 @@ class SignUp extends Model
         return [
             // username and password are both required
             [['password', 'confirmPassword', 'email'], 'required'],
+//            ['email', 'unique'],
+//            ['username', 'unique'],//todo: repeat on relations
             // rememberMe must be a boolean value
             ['username', 'match', 'pattern' => '@^[a-z]+$@', 'message' => 'Invalid user name'],
             ['email', 'validateEmail', 'message' => 'Invalid user name'],
@@ -49,6 +51,15 @@ class SignUp extends Model
 
     public function validateEmail($email, $params)
     {
+        $temp = Userdb::findOne(['email' => $this->email]);
+
+        if (!empty($temp)) {
+            $this->addError($email, 'such email does exist');
+            return false;
+        }
+//        echo '<pre>';
+//        print_r($temp);
+//        echo '</pre>';
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) &&
             preg_match('#^[a-z][a-z0-9\-_\.]+\@gmail\.com$#i', $this->email)
         ) {
@@ -64,11 +75,18 @@ class SignUp extends Model
         $status = $this->validate();
 //        var_dump($status);
         $user = Userdb::findByUsername($this->username);
+//        if($temp = Userdb::findOne(['email' => $this->email])){
+//
+//        }
         if (!empty($user)) {
             $this->addError('username', 'User already exists');
             return false;
         } else if ($status === true) {
+
             $user = new Userdb();
+
+//            $user->username = 'qqqqeqtys';
+//            $user->email= 'qwerqss@q';
 
             $user->setAttributes([
                 'username' => $this->username,
@@ -78,11 +96,13 @@ class SignUp extends Model
                 'created_at' => date('Y-m-d h:i:s'),
                 'updated_at' => date('Y-m-d h:i:s'),
                 'auth_key' => 'this will be rendered when user will want to',//todo:create
-                'password_reset_token' => 'write mechanism uniq render1'//todo: create
+                'password_reset_token' => md5(uniqid(rand(), true))//todo: create
 
             ], false);
             if ($user->save()) {
                 return true;
+            } else {
+                return false;
             }
         }
 
