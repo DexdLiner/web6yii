@@ -11,6 +11,7 @@ namespace app\models;
 
 use yii\base\Model;
 use app\models\Userdb;
+use yii;
 
 class SignUp extends Model
 {
@@ -73,20 +74,15 @@ class SignUp extends Model
     public function SignUp()
     {
         $status = $this->validate();
-//        var_dump($status);
+
         $user = Userdb::findByUsername($this->username);
-//        if($temp = Userdb::findOne(['email' => $this->email])){
-//
-//        }
+
         if (!empty($user)) {
             $this->addError('username', 'User already exists');
             return false;
         } else if ($status === true) {
 
             $user = new Userdb();
-
-//            $user->username = 'qqqqeqtys';
-//            $user->email= 'qwerqss@q';
 
             $user->setAttributes([
                 'username' => $this->username,
@@ -95,10 +91,11 @@ class SignUp extends Model
                 'status' => Userdb::USER_STATUS_REGISTERED,
                 'created_at' => date('Y-m-d h:i:s'),
                 'updated_at' => date('Y-m-d h:i:s'),
-                'auth_key' => 'this will be rendered when user will want to',//todo:create
+                'auth_key' => 'this will be ',//todo:create
                 'password_reset_token' => md5(uniqid(rand(), true))//todo: create
 
-            ], false);
+            ], true);
+
             if ($user->save()) {
                 return true;
             } else {

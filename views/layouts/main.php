@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -77,6 +78,7 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+<?php //echo password_hash(123 . Yii::$app->params['SALT'], PASSWORD_ARGON2I);?>
 </body>
 </html>
 <?php $this->endPage() ?>

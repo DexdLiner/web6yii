@@ -19,7 +19,7 @@ class m190213_184127_users extends Migration
         $this->createTable('{{%users}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string(32)->unique()->notNull(),
-            'password' => $this->string(64)->notNull(),
+            'password' => $this->string(95)->notNull(),
             'email' => $this->string(255)->notNull()->unique(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at' => $this->timestamp()->defaultValue(null)->notNull(),

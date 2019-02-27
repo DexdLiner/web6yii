@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-
+use app\models\Userdb;
 /**
  * LoginForm is the model behind the login form.
  *
@@ -60,7 +60,9 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
+
             $this->_user = Userdb::findByUsername($this->username);
+
         }
 
         return $this->_user;

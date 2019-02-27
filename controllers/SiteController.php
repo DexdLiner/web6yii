@@ -140,8 +140,10 @@ class SiteController extends Controller
     public function actionSignUp()
     {
         $data = new SignUp();
+
         if ($data->load(Yii::$app->request->post()) && $data->SignUp()) {
             Yii::$app->session->setFlash('success', 'ty 4 registration');
+//            Yii::$app->
         }
         $data->password = '';
         $data->confirmPassword = '';
