@@ -25,7 +25,9 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <?php
 
+    ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -45,6 +47,7 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'SignUp', 'url' => ['/site/sign-up']],
+            ['label' => 'Posts', 'url' => ['/posts/index']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/site/login']]
@@ -64,6 +67,10 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
+        <?php $a = '<p>qweryu</p>';
+        echo HTML::encode($a);
+//        echo HTML::a('text', '/posts/update?id=1');
+        ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -77,7 +84,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
     </div>
 </footer>
 

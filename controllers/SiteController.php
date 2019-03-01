@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\resetPassword;
 use app\models\SignUp;
 use app\models\User;
 use Yii;
@@ -12,6 +13,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Userdb;
+use yii\helpers\Html;
 
 class SiteController extends Controller
 {
@@ -125,6 +127,29 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
+    }
+
+    public function actionResetPassword()
+    {
+        $model = new resetPassword();
+
+        $showForm = true;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->resetPassword()) {
+                Yii::$app->session->setFlash('success', 'link to reset password has been send, check your email');
+                $showForm = false;
+            } else {
+                Yii::$app->session->setFlash('error', 'Cant find such email');
+
+            }
+        }
+
+        return $this->render('userResetPassword', [
+            'model' => $model,
+            'showForm' => $showForm
+        ]);
+
     }
 
     /**

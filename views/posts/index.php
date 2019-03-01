@@ -16,20 +16,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Posts', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="qwerty">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'class' => ['qwerty'],
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'user_id',
+//            'date_created',
+//            'date_updated',
+                'body:ntext',
+                'title',
 
-            'id',
-            'user_id',
-            'date_created',
-            'date_updated',
-            'body:ntext',
-            //'title',
+                ['class' => 'yii\grid\ActionColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+            ],
+        ]); ?>
+    </div>
 </div>
